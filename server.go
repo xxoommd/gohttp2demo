@@ -12,7 +12,10 @@ import (
 
 func main() {
 	handler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		log.Printf("Got connection: %s", r.Proto)
+		r.ParseForm()
+		i := r.Form.Get("i")
+		j := r.Form.Get("j")
+		log.Printf("Got connection [%s-%s]: %s", i, j, r.Proto)
 		w.Write([]byte("Hello"))
 	})
 
